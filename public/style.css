@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Trade+Winds&display=swap');
+
+h1 {
+    text-align: center;
+    margin: 25px;
+    font-family: Papyrus, serif;
+    font-weight: bold;
+}
+
+h2 {
+    text-align: center;
+    font-family: "Comic Sans MS", serif;
+}
+
+aside {
+    background-color: rgb(255, 241, 211);
+    position: absolute;
+    height: 100%;
+    width: 250px;
+    border-right: 1px solid rgb(235, 237, 239);
+    padding: 20px;
+
+}
+
+.boton {
+    margin-top: 10px;
+    float: right;
+    margin-bottom: 20px;
+    margin-right: 20px;
+}
+
+hr {
+    clear: right;
+    padding: 0;
+
+}
+
+.container-fluid {
+    margin: 0;
+    padding: 0;
+}
+
+.cuerpo {
+    margin-left: 10px;
+}
+
+table{
+    margin: 30px 0 0 30px;
+}
+
+td, th{
+    border: 1px solid black;
+    padding: 10px;
+}
+
+th{
+    text-align: center;
+    background-color: rgb(255, 241, 211);
+}
+
+.idPlato{
+    text-align: center;
+}
+
+.nav-link{
+    color: black;
+}
