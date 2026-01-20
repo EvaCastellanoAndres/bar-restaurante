@@ -1,14 +1,14 @@
 <?php
-namespace controllers;
 
+namespace controllers;
 use models\Plato;
 
-class ProductosController
+class PlatoController
 {
-    public function listarPlatos()
+    public function listarPlatos(): void
     {
         $plato = new Plato();
-        $datos = $plato->listar();
+        $platos = $plato->listar();
         require __DIR__ . '/../views/listarProductosView.php';
     }
 }

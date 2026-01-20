@@ -2,9 +2,10 @@
 
 h1 {
     text-align: center;
-    margin: 25px;
+    padding: 25px;
     font-family: Papyrus, serif;
     font-weight: bold;
+    background-color: rgb(255, 241, 211);
 }
 
 h2 {
@@ -20,6 +21,10 @@ aside {
     border-right: 1px solid rgb(235, 237, 239);
     padding: 20px;
 
+}
+
+.header {
+    background-color: rgb(255, 241, 211);
 }
 
 .boton {
@@ -44,24 +49,24 @@ hr {
     margin-left: 10px;
 }
 
-table{
+table {
     margin: 30px 0 0 30px;
 }
 
-td, th{
+td, th {
     border: 1px solid black;
     padding: 10px;
 }
 
-th{
+th {
     text-align: center;
     background-color: rgb(255, 241, 211);
 }
 
-.idPlato{
+.disponible{
     text-align: center;
 }
 
-.nav-link{
+.nav-link {
     color: black;
 }

@@ -1,10 +1,10 @@
 <?php
-spl_autoload_register(function ($class)
+function autoload ($class)
 {
     $rutas = [
-        __DIR__ . "/app/controllers/$class.php",
-        __DIR__ . "/app/models/$class.php",
-        __DIR__ . "/app/config/$class.php"
+        __DIR__ . "/controllers/$class.php",
+        __DIR__ . "/models/$class.php",
+        __DIR__ . "/config/$class.php"
     ];
 
     foreach ($rutas as $ruta) {
@@ -13,5 +13,5 @@ spl_autoload_register(function ($class)
         }
     }
 
-});
-
+};
+spl_autoload_register("autoload");

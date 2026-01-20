@@ -1,8 +1,4 @@
 <?php
-namespace models;
-
-use PDO;
-
 class Plato
 {
     private $db;
@@ -15,8 +11,6 @@ class Plato
     public function listar()
     {
         $sql = "SELECT * FROM platos";
-        return $this->db
-            ->lanzar_consulta($sql)
-            ->fetchAll(PDO::FETCH_ASSOC);
+        return $this->db->lanzar_consulta($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
 }
