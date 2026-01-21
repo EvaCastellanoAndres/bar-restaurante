@@ -13,4 +13,5 @@ class Plato
         $sql = "SELECT * FROM platos";
         return $this->db->lanzar_consulta($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
+
 }

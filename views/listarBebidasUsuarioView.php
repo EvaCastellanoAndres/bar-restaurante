@@ -1,14 +1,13 @@
 <?php require 'layout/header.php'; ?>
-
 <ul class="nav justify-content-center nav-tabs">
     <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="#">Todos los productos</a>
+        <a class="nav-link" href="index.php?url=producto/listarProductos">Todos los productos</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="index.php?url=plato/listar">Platos</a>
+        <a class="nav-link" aria-current="page" href="index.php?url=plato/listar">Platos</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="index.php?url=bebida/listar">Bebidas</a>
+        <a class="nav-link active" aria-current="page" href="#">Bebidas</a>
     </li>
 </ul>
 </div>
@@ -20,6 +19,7 @@
 
 <div class="col-10">
     <div class="cuerpo">
+        <h1>ZONA USUARIO</h1>
         <table>
             <tr>
                 <th>Producto</th>
@@ -28,20 +28,7 @@
                 <th>Disponible</th>
                 <th>Foto</th>
             </tr>
-            <?php foreach ($platos as $plato) : ?>
-                <tr>
-                    <td class="centrado"><?= $plato['nombre'] ?></td>
-                    <td><?= $plato['descripcion'] ?></td>
-                    <td class="centrado"><?= $plato['precio'] ?>€</td>
-                    <td class="centrado"><?php if ($plato['disponible'] == 1) {
-                            echo "Sí";
-                        } else {
-                            echo "No";
-                        } ?></td>
-                    <td><?= $plato['foto'] ?></td>
-                </tr>
-            <?php endforeach; ?>
-            <?php foreach ($bebidas as $bebida): ?>
+            <?php foreach ($bebidas as $bebida) : ?>
                 <tr>
                     <td class="centrado"><?= $bebida['nombre'] ?></td>
                     <td><?= $bebida['descripcion'] ?></td>

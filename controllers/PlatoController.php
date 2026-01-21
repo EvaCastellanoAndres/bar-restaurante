@@ -1,14 +1,18 @@
 <?php
 
-namespace controllers;
-use models\Plato;
-
 class PlatoController
 {
-    public function listarPlatos(): void
+    public function listar(): void
     {
+        session_start();
+
         $plato = new Plato();
         $platos = $plato->listar();
-        require __DIR__ . '/../views/listarProductosView.php';
+
+        if (isset($_SESSION['usuario'])) {
+            require __DIR__ . '/../views/listarPlatosUsuarioView.php';
+        } else {
+            require __DIR__ . '/../views/listarPlatosView.php';
+        }
     }
 }

@@ -1,0 +1,41 @@
+<?php
+class UsuarioController
+{
+    public function registro(): void
+    {
+        if ($_POST) {
+            $usuario = new Usuario();
+            $usuario->registrar(
+                $_POST['email'],
+                $_POST['usuario'],
+                $_POST['password']
+            );
+
+            header('Location: index.php?url=producto/listarProductos');
+        }
+    }
+
+    public function iniciarSesion(): void
+    {
+        if ($_POST) {
+            $usuario = new Usuario();
+            $user = $usuario->iniciarSesion($_POST['usuario'], $_POST['password']);
+
+            if ($user) {
+                session_start();
+                $_SESSION['usuario'] = $user['usuario'];
+
+                header('Location: index.php?url=producto/listarProductos');
+            } else {
+                echo "Usuario o contraseña incorrectos";
+            }
+        }
+    }
+
+    public function logout(): void
+    {
+        session_start();
+        session_destroy();
+        header('Location: index.php');
+    }
+}

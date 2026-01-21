@@ -16,10 +16,12 @@
 <!-- SESIONES -->
 <?php require 'layout/aside.php'; ?>
 
+
 <!-- TABLA -->
 
 <div class="col-10">
     <div class="cuerpo">
+        <h1>ZONA USUARIO</h1>
         <table>
             <tr>
                 <th>Producto</th>

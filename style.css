@@ -63,10 +63,15 @@ th {
     background-color: rgb(255, 241, 211);
 }
 
-.disponible{
+.centrado {
     text-align: center;
 }
 
 .nav-link {
     color: black;
+}
+
+input {
+    border-radius: 5px;
+    border: 1px solid black;
 }

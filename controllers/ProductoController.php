@@ -1,26 +1,25 @@
 <?php
 class ProductoController
 {
-    public function listarPlatos(): void
-    {
-        $plato = new Plato();
-        $platos = $plato->listar();
-        require __DIR__ . '/../views/listarProductosView.php';
-    }
-
-    public function listarBebidas(): void
-    {
-        $bebida = new Bebida();
-        $bebidas = $bebida->listar();
-        require __DIR__ . '/../views/listarProductosView.php';
-    }
 
     public function listarProductos(): void
     {
+        session_start();
+
         $plato = new Plato();
+        $bebida = new Bebida();
+
         $platos = $plato->listar();
-        require __DIR__ . '/../views/listarProductosView.php';
+        $bebidas = $bebida->listar();
+
+
+        if (isset($_SESSION['usuario'])) {
+            require __DIR__ . '/../views/listarProductosUsuarioView.php';
+        } else {
+            require __DIR__ . '/../views/listarProductosView.php';
+        }
     }
+
 
 
 }
