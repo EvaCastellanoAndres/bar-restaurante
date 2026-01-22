@@ -13,8 +13,7 @@ class Usuario
     {
         $sql = "insert into usuarios (email, usuario, password) values (:email, :usuario, :password)";
 
-        $stmt = $this->db->lanzar_consulta($sql);
-        $stmt->execute([
+        $this->db->lanzar_consulta($sql,[
             ':email' => $email,
             ':usuario' => $usuario,
             ':password' => password_hash($password, PASSWORD_DEFAULT)
@@ -24,8 +23,7 @@ class Usuario
     public function iniciarSesion($usuario, $password)
     {
         $sql = "select * from usuarios where usuario = :usuario";
-        $stmt = $this->db->lanzar_consulta($sql);
-        $stmt->execute([':usuario' => $usuario]);
+        $stmt = $this->db->lanzar_consulta($sql,[':usuario' => $usuario]);
 
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 

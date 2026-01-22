@@ -14,18 +14,18 @@
 </div>
 
 <!-- SESIONES -->
-<?php require 'layout/aside.php'; ?>
+<?php require 'layout/asideUsuario.php'; ?>
 
 
 <!-- TABLA -->
 
 <div class="col-10">
     <div class="cuerpo">
-        <h1>ZONA USUARIO</h1>
         <table>
             <tr>
                 <th>Producto</th>
                 <th>Descripción</th>
+                <th>Categoría</th>
                 <th>Precio</th>
                 <th>Disponible</th>
                 <th>Foto</th>
@@ -34,19 +34,21 @@
                 <tr>
                     <td class="centrado"><?= $plato['nombre'] ?></td>
                     <td><?= $plato['descripcion'] ?></td>
+                    <td><?= $plato['categoria'] ?></td>
                     <td class="centrado"><?= $plato['precio'] ?>€</td>
                     <td class="centrado"><?php if ($plato['disponible'] == 1) {
                             echo "Sí";
                         } else {
                             echo "No";
                         } ?></td>
-                    <td><?= $plato['foto'] ?></td>
+                    <td><!--<img src="../img/croquetas.jpg" alt="$plato['nombre']">--></td>
                 </tr>
             <?php endforeach; ?>
             <?php foreach ($bebidas as $bebida): ?>
                 <tr>
                     <td class="centrado"><?= $bebida['nombre'] ?></td>
                     <td><?= $bebida['descripcion'] ?></td>
+                    <td><?= $bebida['categoria'] ?></td>
                     <td class="centrado"><?= $bebida['precio'] ?>€</td>
                     <td class="centrado"><?php if ($bebida['disponible'] == 1) {
                             echo "Sí";

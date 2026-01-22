@@ -32,7 +32,7 @@ class UsuarioController
         }
     }
 
-    public function logout(): void
+    public function cerrarSesion(): void
     {
         session_start();
         session_destroy();
