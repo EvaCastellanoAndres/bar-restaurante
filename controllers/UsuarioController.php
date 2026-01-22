@@ -1,7 +1,7 @@
 <?php
 class UsuarioController
 {
-    public function registro(): void
+    public function registrar(): void
     {
         if ($_POST) {
             $usuario = new Usuario();
@@ -27,7 +27,7 @@ class UsuarioController
 
                 header('Location: index.php?url=producto/listarProductos');
             } else {
-                echo "Usuario o contraseña incorrectos";
+                echo "Usuario o contraseña incorrectos"; // TODO
             }
         }
     }

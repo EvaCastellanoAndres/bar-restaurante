@@ -11,9 +11,6 @@ if (isset($_SESSION['usuario'])) {
 
                 <h2>Bienvenidx, <?= $usuario ?></h2>
                 <hr>
-                <form action="" method="post">
-                    <input type="submit" value="Hacer pedido">
-                </form>
 
                 <br><br><br><br><br>
                 <form action="index.php?url=usuario/cerrarSesion" method="post">

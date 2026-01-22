@@ -20,6 +20,7 @@
 
 <div class="col-10">
     <div class="cuerpo">
+        <img src="../img/croquetas.jpg" alt="">
         <table>
             <tr>
                 <th>Producto</th>
@@ -29,7 +30,9 @@
                 <th>Foto</th>
             </tr>
             <?php foreach ($platos as $plato) : ?>
-                <tr>
+
+                    <tr class="tr_producto" onclick="window.location='detalle.php?id=<?= $plato['id'] ?>'"> <!-- TODO -->
+
                     <td class="centrado"><?= $plato['nombre'] ?></td>
                     <td><?= $plato['descripcion'] ?></td>
                     <td class="centrado"><?= $plato['precio'] ?>€</td>
@@ -38,11 +41,12 @@
                         } else {
                             echo "No";
                         } ?></td>
-                    <td><?= $plato['foto'] ?></td>
-                </tr>
+                    <td><img src="../img/croquetas.jpg" alt="<?= $plato['nombre'] ?>"></td>
+                       </tr>
+
             <?php endforeach; ?>
             <?php foreach ($bebidas as $bebida): ?>
-                <tr>
+                <tr class="tr_producto">
                     <td class="centrado"><?= $bebida['nombre'] ?></td>
                     <td><?= $bebida['descripcion'] ?></td>
                     <td class="centrado"><?= $bebida['precio'] ?>€</td>

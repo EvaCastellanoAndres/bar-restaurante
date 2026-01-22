@@ -14,6 +14,8 @@ class ProductoController
 
 
         if (isset($_SESSION['usuario'])) {
+            $usuario=$_SESSION['usuario'];
+
             require __DIR__ . '/../views/listarProductosUsuarioView.php';
         } else {
             require __DIR__ . '/../views/listarProductosView.php';

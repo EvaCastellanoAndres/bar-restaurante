@@ -17,7 +17,7 @@
                 <hr>
 
                 <h2>Registrarse</h2>
-                <form action="index.php?url=usuario/registro" method="post">
+                <form action="index.php?url=usuario/registrar" method="post">
                     <label>
                         Email
                         <br>

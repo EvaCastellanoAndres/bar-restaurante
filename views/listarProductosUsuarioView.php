@@ -21,44 +21,66 @@
 
 <div class="col-10">
     <div class="cuerpo">
-        <table>
-            <tr>
-                <th>Producto</th>
-                <th>Descripción</th>
-                <th>Categoría</th>
-                <th>Precio</th>
-                <th>Disponible</th>
-                <th>Foto</th>
-            </tr>
-            <?php foreach ($platos as $plato) : ?>
+        <form action="index.php?url=pedido/resumenPedido" method="post"> <!-- TODO -->
+
+            <label class="select_servicio">
+                Tipo de servicio:
+                <select name="servicio" required>
+                    <option disabled selected value="">Seleccione el tipo de servicio</option>
+                    <option value="mesa">En mesa</option>
+                    <option value="llevar">Para llevar</option>
+                    <option value="domicilio">Entregar a domicilio</option>
+                </select>
+            </label>
+
+            <table>
                 <tr>
-                    <td class="centrado"><?= $plato['nombre'] ?></td>
-                    <td><?= $plato['descripcion'] ?></td>
-                    <td><?= $plato['categoria'] ?></td>
-                    <td class="centrado"><?= $plato['precio'] ?>€</td>
-                    <td class="centrado"><?php if ($plato['disponible'] == 1) {
-                            echo "Sí";
-                        } else {
-                            echo "No";
-                        } ?></td>
-                    <td><!--<img src="../img/croquetas.jpg" alt="$plato['nombre']">--></td>
+                    <th>Pedir</th>
+                    <th>Producto</th>
+                    <th>Descripción</th>
+                    <th>Categoría</th>
+                    <th>Precio</th>
+                    <th>Disponible</th>
+                    <th>Foto</th>
                 </tr>
-            <?php endforeach; ?>
-            <?php foreach ($bebidas as $bebida): ?>
-                <tr>
-                    <td class="centrado"><?= $bebida['nombre'] ?></td>
-                    <td><?= $bebida['descripcion'] ?></td>
-                    <td><?= $bebida['categoria'] ?></td>
-                    <td class="centrado"><?= $bebida['precio'] ?>€</td>
-                    <td class="centrado"><?php if ($bebida['disponible'] == 1) {
-                            echo "Sí";
-                        } else {
-                            echo "No";
-                        } ?></td>
-                    <td><?= $bebida['foto'] ?></td>
-                </tr>
-            <?php endforeach; ?>
-        </table>
+
+                <?php foreach ($platos as $plato) : ?>
+                    <tr>
+                        <td>
+                            <input type="number" class="inputPedir" name="platos[<?= $plato['id'] ?>]" min="0">
+                        </td>
+                        <td class="centrado"><?= $plato['nombre'] ?></td>
+                        <td><?= $plato['descripcion'] ?></td>
+                        <td><?= $plato['categoria'] ?></td>
+                        <td class="centrado"><?= $plato['precio'] ?>€</td>
+                        <td class="centrado"><?php if ($plato['disponible'] == 1) {
+                                echo "Sí";
+                            } else {
+                                echo "No";
+                            } ?></td>
+                        <td><!--<img src="../img/croquetas.jpg" alt="$plato['nombre']">--></td>
+                    </tr>
+                <?php endforeach; ?>
+                <?php foreach ($bebidas as $bebida): ?>
+                    <tr>
+                        <td>
+                            <input type="number" class="inputPedir" name="bebidas[<?= $bebida['id'] ?>]" min="0">
+                        </td>
+                        <td class="centrado"><?= $bebida['nombre'] ?></td>
+                        <td><?= $bebida['descripcion'] ?></td>
+                        <td><?= $bebida['categoria'] ?></td>
+                        <td class="centrado"><?= $bebida['precio'] ?>€</td>
+                        <td class="centrado"><?php if ($bebida['disponible'] == 1) {
+                                echo "Sí";
+                            } else {
+                                echo "No";
+                            } ?></td>
+                        <td><?= $bebida['foto'] ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            </table>
+            <input type="submit" value="Realizar pedido" class="boton">
+        </form>
     </div>
 </div>
 </div>
