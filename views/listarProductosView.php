@@ -31,7 +31,7 @@
             </tr>
             <?php foreach ($platos as $plato) : ?>
 
-                    <tr class="tr_producto" onclick="window.location='detalle.php?id=<?= $plato['id'] ?>'"> <!-- TODO -->
+                    <tr class="tr_producto""> <!-- TODO -->
 
                     <td class="centrado"><?= $plato['nombre'] ?></td>
                     <td><?= $plato['descripcion'] ?></td>

@@ -1,5 +1,5 @@
 <?php
-use Intervention\Image\ImageManagerStatic as Image;
+// use Intervention\Image\ImageManagerStatic as Image;
 class PlatoController
 {
     public function listar(): void

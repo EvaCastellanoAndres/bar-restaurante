@@ -5,8 +5,8 @@ class PedidoController
     {
         session_start();
 
-        $platos = $_POST['platos'] ?? [];
-        $bebidas = $_POST['bebidas'] ?? [];
+        $platos = $_POST['plato'] ?? [];
+        $bebidas = $_POST['bebida'] ?? [];
         $pedido = new Pedido();
         $resumen = $pedido->resumen($platos, $bebidas);
 
@@ -15,10 +15,10 @@ class PedidoController
 
     public function realizarPedido(): void
     {
-        session_start();
-
+        $platos = $_POST['plato'] ?? [];
+        $bebidas = $_POST['bebida'] ?? [];
         $pedido = new Pedido();
-        $pedidoRealizado = $pedido->realizarPedido();
+        $pedidoRealizado = $pedido->realizarPedido($platos, $bebidas);
 
 
         require __DIR__ . '/../views/realizarPedidoView.php'; // TODO

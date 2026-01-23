@@ -26,4 +26,11 @@ class Db
         $sentencia->execute($parametros);
         return $sentencia;
     }
+
+    public function getConexion() {
+        return $this->conexion;
+    }
+    public function lastInsertId() {
+        return $this->conexion->lastInsertId();
+    }
 }

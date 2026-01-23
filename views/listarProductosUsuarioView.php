@@ -1,3 +1,11 @@
+<?php
+$filtro = "";
+
+if (isset($_GET['filtrar'])) {
+    $filtro = $_GET['filtrar'];
+}
+?>
+
 <?php require 'layout/header.php'; ?>
 
 <ul class="nav justify-content-center nav-tabs">

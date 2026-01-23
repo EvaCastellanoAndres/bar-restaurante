@@ -11,13 +11,16 @@ class Pedido
 
     public function resumen($platos, $bebidas)
     {
+        echo "Resumen ";
+        var_dump($platos, $bebidas);
         $resumen = [];
 
         foreach ($platos as $id => $cantidad) {
             if ($cantidad > 0) {
-                $sql = "SELECT * FROM platos WHERE id = ?";
-                $stmt = $this->db->lanzar_consulta($sql, [$id]);
+                $stmt = $this->db->lanzar_consulta("SELECT * FROM platos WHERE id = ?", [$id]);
                 $producto = $stmt->fetch(PDO::FETCH_ASSOC);
+                if (!$producto) continue;
+
                 $producto['cantidad'] = $cantidad;
                 $producto['tipo'] = 'plato';
                 $resumen[] = $producto;
@@ -26,9 +29,10 @@ class Pedido
 
         foreach ($bebidas as $id => $cantidad) {
             if ($cantidad > 0) {
-                $sql = "SELECT * FROM bebidas WHERE id = ?";
-                $stmt = $this->db->lanzar_consulta($sql, [$id]);
+                $stmt = $this->db->lanzar_consulta("SELECT * FROM bebidas WHERE id = ?", [$id]);
                 $producto = $stmt->fetch(PDO::FETCH_ASSOC);
+                if (!$producto) continue;
+
                 $producto['cantidad'] = $cantidad;
                 $producto['tipo'] = 'bebida';
                 $resumen[] = $producto;
@@ -38,46 +42,73 @@ class Pedido
         return $resumen;
     }
 
-    public function realizarPedido($platos, $bebidas, $tipoServicio = 'en mesa', $mesa = null)
+    public function realizarPedido()
     {
         session_start();
 
-        $usuario = $_SESSION['usuario'];
+        if (!isset($_SESSION['usuario'])) {
+            throw new Exception("No hay usuario logueado");
+        }
 
-        $sql = "SELECT id FROM usuarios WHERE usuario = :usuario";
-        $stmt = $this->db->lanzar_consulta($sql, [':usuario' => $usuario]);
+        // Recoger datos del formulario
+        $platos = $_POST['plato'] ?? [];
+        $bebidas = $_POST['bebida'] ?? [];
+        $tipoServicio = $_POST['servicio'] ?? 'en mesa';
+
+        // Usuario
+        $stmt = $this->db->lanzar_consulta("SELECT id FROM usuarios WHERE usuario = :usuario", [
+            ':usuario' => $_SESSION['usuario']
+        ]);
         $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+        if (!$usuario) {
+            throw new Exception("Usuario no encontrado");
+        }
         $idUsuario = $usuario['id'];
+        var_dump($_POST);
+        exit();
+
+        // Resumen y total
+        $resumen = $this->resumen($platos, $bebidas);
+        if (empty($resumen)) {
+            throw new Exception("No hay productos seleccionados");
+        }
 
         $total = 0;
-        $resumen = $this->resumen($platos, $bebidas);
         foreach ($resumen as $item) {
             $total += $item['precio'] * $item['cantidad'];
         }
 
-        $sql = "INSERT INTO pedidos (id_usuario, tipo_servicio, mesa, coste_total) 
-                VALUES (:id_usuario, :tipo_servicio, :mesa, :coste_total)";
-        $stmt = $this->db->lanzar_consulta($sql, [
-            ':id_usuario' => $idUsuario,
-            ':tipo_servicio' => $tipoServicio,
-            ':mesa' => $mesa,
-            ':coste_total' => $total
-        ]);
+        // Insertar pedido
+        $this->db->lanzar_consulta(
+            "INSERT INTO pedidos (id_usuario, tipo_servicio) VALUES (:id_usuario, :tipo_servicio)",
+            [':id_usuario' => $idUsuario, ':tipo_servicio' => $tipoServicio]
+        );
+        $idPedido = $this->db->lastInsertId();
 
-        $idPedido = $this->db->getConexion()->lastInsertId();
-
+        // Insertar detalle
         foreach ($resumen as $item) {
-            $sql = "INSERT INTO pedido_detalle (id_pedido, tipo, id_producto, cantidad, precio)
-                    VALUES (:id_pedido, :tipo, :id_producto, :cantidad, :precio)";
-            $this->db->lanzar_consulta($sql, [
-                ':id_pedido' => $idPedido,
-                ':tipo' => $item['tipo'],
-                ':id_producto' => $item['id'],
-                ':cantidad' => $item['cantidad'],
-                ':precio' => $item['precio']
-            ]);
+            if ($item['tipo'] === 'plato') {
+                $sql = "INSERT INTO pedido_detalle (id_pedido, id_plato, cantidad, precio_unidad)
+                        VALUES (:id_pedido, :id_plato, :cantidad, :precio_unidad)";
+                $params = [
+                    ':id_pedido' => $idPedido,
+                    ':id_plato' => $item['id'],
+                    ':cantidad' => $item['cantidad'],
+                    ':precio_unidad' => $item['precio']
+                ];
+            } else { // bebida
+                $sql = "INSERT INTO pedido_detalle (id_pedido, id_bebida, cantidad, precio_unidad)
+                        VALUES (:id_pedido, :id_bebida, :cantidad, :precio_unidad)";
+                $params = [
+                    ':id_pedido' => $idPedido,
+                    ':id_bebida' => $item['id'],
+                    ':cantidad' => $item['cantidad'],
+                    ':precio_unidad' => $item['precio']
+                ];
+            }
+            $this->db->lanzar_consulta($sql, $params);
         }
 
-        return $idPedido; // opcional: devolver id para mostrar resumen
+        return $idPedido;
     }
 }

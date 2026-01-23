@@ -8,9 +8,10 @@ class ProductoController
 
         $plato = new Plato();
         $bebida = new Bebida();
+        $filtro = $_GET['filtrar'] ?? "";
 
-        $platos = $plato->listar();
-        $bebidas = $bebida->listar();
+        $platos = $plato->listar($filtro);
+        $bebidas = $bebida->listar($filtro);
 
 
         if (isset($_SESSION['usuario'])) {
@@ -21,7 +22,5 @@ class ProductoController
             require __DIR__ . '/../views/listarProductosView.php';
         }
     }
-
-
 
 }

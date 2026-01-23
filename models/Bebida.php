@@ -9,9 +9,18 @@ class Bebida
         $this->db = new Db();
     }
 
-    public function listar()
+    public function listar($filtro = "")
     {
-        $sql = "SELECT * FROM bebidas";
-        return $this->db->lanzar_consulta($sql)->fetchAll(PDO::FETCH_ASSOC);
+        if ($filtro != "" && $filtro != "todo") {
+            $sql = "SELECT * FROM bebidas WHERE categoria = :categoria";
+            $stmt = $this->db->lanzar_consulta($sql, [':categoria' => $filtro]);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } else {
+            $sql = "SELECT * FROM bebidas";
+            $stmt = $this->db->lanzar_consulta($sql);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+
     }
 }

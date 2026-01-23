@@ -15,7 +15,7 @@
                 <th>Producto</th>
                 <th>Descripción</th>
                 <th>Categoría</th>
-                <th>Precio</th>
+                <th>Precio unidad</th>
                 <th>Foto</th>
             </tr>
             <?php foreach ($resumen as $producto): ?>
@@ -32,12 +32,17 @@
         </table>
         <p><b>Total: <?= $total ?>€</b></p>
 
-        <form action="index.php?url=produto/listar" method="post">
+        <form action="index.php?url=produto/listarProductos" method="post">
             <input type="submit" value="Volver">
         </form>
 
         <form action="index.php?url=pedido/realizarPedido" method="post">
+            <?php foreach ($resumen as $producto): ?>
+                <input type="hidden" name="<?= $producto['tipo'] ?>[<?= $producto['id'] ?>]" value="<?= $producto['cantidad'] ?>">
+            <?php endforeach; ?>
+
             <input type="submit" value="Pedir">
         </form>
+
     </div>
 </div>
