@@ -89,3 +89,7 @@ input {
 .select_servicio{
     margin: 30px 0 0 30px;
 }
+
+.error{
+    color: rgba(255, 0, 0, 0.83);
+}

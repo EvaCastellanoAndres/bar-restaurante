@@ -4,9 +4,14 @@ class PedidoController
     public function resumenPedido(): void
     {
         session_start();
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            header('Location: index.php?url=producto/listarProductos');
+            exit();
+        }
 
-        $platos = $_POST['plato'] ?? [];
-        $bebidas = $_POST['bebida'] ?? [];
+        $platos = $_POST['platos'] ?? [];
+        $bebidas = $_POST['bebidas'] ?? [];
+
         $pedido = new Pedido();
         $resumen = $pedido->resumen($platos, $bebidas);
 
@@ -15,12 +20,15 @@ class PedidoController
 
     public function realizarPedido(): void
     {
-        $platos = $_POST['plato'] ?? [];
-        $bebidas = $_POST['bebida'] ?? [];
+        session_start();
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            header('Location: index.php?url=producto/listarProductos');
+            exit();
+        }
+
         $pedido = new Pedido();
-        $pedidoRealizado = $pedido->realizarPedido($platos, $bebidas);
+        $idPedido = $pedido->realizarPedido();
 
-
-        require __DIR__ . '/../views/realizarPedidoView.php'; // TODO
+        require __DIR__ . '/../views/realizarPedidoView.php';
     }
 }

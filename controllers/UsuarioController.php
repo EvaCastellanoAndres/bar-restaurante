@@ -27,7 +27,7 @@ class UsuarioController
 
                 header('Location: index.php?url=producto/listarProductos');
             } else {
-                echo "Usuario o contraseña incorrectos"; // TODO
+                header('Location: index.php?url=producto/listarProductos&error=1');
             }
         }
     }

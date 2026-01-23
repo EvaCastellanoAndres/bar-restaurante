@@ -9,50 +9,44 @@ class Pedido
         $this->db = new Db();
     }
 
-    public function resumen($platos, $bebidas)
+    public function resumen($platos, $bebidas) : array
     {
-        echo "Resumen ";
-        var_dump($platos, $bebidas);
         $resumen = [];
-
         foreach ($platos as $id => $cantidad) {
-            if ($cantidad > 0) {
+            if ((int)$cantidad > 0) {
                 $stmt = $this->db->lanzar_consulta("SELECT * FROM platos WHERE id = ?", [$id]);
                 $producto = $stmt->fetch(PDO::FETCH_ASSOC);
                 if (!$producto) continue;
 
-                $producto['cantidad'] = $cantidad;
+                $producto['cantidad'] = (int)$cantidad;
                 $producto['tipo'] = 'plato';
                 $resumen[] = $producto;
             }
         }
-
         foreach ($bebidas as $id => $cantidad) {
-            if ($cantidad > 0) {
+            if ((int)$cantidad > 0) {
                 $stmt = $this->db->lanzar_consulta("SELECT * FROM bebidas WHERE id = ?", [$id]);
                 $producto = $stmt->fetch(PDO::FETCH_ASSOC);
                 if (!$producto) continue;
 
-                $producto['cantidad'] = $cantidad;
+                $producto['cantidad'] = (int)$cantidad;
                 $producto['tipo'] = 'bebida';
                 $resumen[] = $producto;
             }
         }
-
         return $resumen;
     }
 
+
     public function realizarPedido()
     {
-        session_start();
-
         if (!isset($_SESSION['usuario'])) {
             throw new Exception("No hay usuario logueado");
         }
 
         // Recoger datos del formulario
-        $platos = $_POST['plato'] ?? [];
-        $bebidas = $_POST['bebida'] ?? [];
+        $platos = $_POST['platos'] ?? [];
+        $bebidas = $_POST['bebidas'] ?? [];
         $tipoServicio = $_POST['servicio'] ?? 'en mesa';
 
         // Usuario
@@ -64,8 +58,6 @@ class Pedido
             throw new Exception("Usuario no encontrado");
         }
         $idUsuario = $usuario['id'];
-        var_dump($_POST);
-        exit();
 
         // Resumen y total
         $resumen = $this->resumen($platos, $bebidas);

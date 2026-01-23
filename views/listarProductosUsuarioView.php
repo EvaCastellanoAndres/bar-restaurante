@@ -55,7 +55,7 @@ if (isset($_GET['filtrar'])) {
                 <?php foreach ($platos as $plato) : ?>
                     <tr>
                         <td>
-                            <input type="number" class="inputPedir" name="platos[<?= $plato['id'] ?>]" min="0">
+                            <input type="number" class="inputPedir" name="platos[<?= $plato['id'] ?>]" min="0" value="0">
                         </td>
                         <td class="centrado"><?= $plato['nombre'] ?></td>
                         <td><?= $plato['descripcion'] ?></td>
@@ -72,7 +72,7 @@ if (isset($_GET['filtrar'])) {
                 <?php foreach ($bebidas as $bebida): ?>
                     <tr>
                         <td>
-                            <input type="number" class="inputPedir" name="bebidas[<?= $bebida['id'] ?>]" min="0">
+                            <input type="number" class="inputPedir" name="bebidas[<?= $bebida['id'] ?>]" min="0" value="0">
                         </td>
                         <td class="centrado"><?= $bebida['nombre'] ?></td>
                         <td><?= $bebida['descripcion'] ?></td>

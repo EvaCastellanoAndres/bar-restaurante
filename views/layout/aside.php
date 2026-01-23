@@ -12,8 +12,15 @@
                         Contraseña
                         <input type="password" name="password">
                     </label>
+                    <?php
+                    if (isset($_GET['error'])) {
+                        echo '<p class="error">Usuario o contraseña incorrectos</p>';
+                    }
+                    ?>
+
                     <input type="submit" value="Entrar" class="boton">
                 </form>
+
                 <hr>
 
                 <h2>Registrarse</h2>
