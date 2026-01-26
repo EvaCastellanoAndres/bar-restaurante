@@ -1,4 +1,5 @@
 <?php
+
 class UsuarioController
 {
     public function registrar(): void
@@ -24,7 +25,7 @@ class UsuarioController
             if ($user) {
                 session_start();
                 $_SESSION['usuario'] = $user['usuario'];
-
+                $_SESSION['rol'] = $user['rol'];
                 header('Location: index.php?url=producto/listarProductos');
             } else {
                 header('Location: index.php?url=producto/listarProductos&error=1');

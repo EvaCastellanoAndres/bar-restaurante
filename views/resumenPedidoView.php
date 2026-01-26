@@ -30,19 +30,24 @@
                 <?php $total += $producto['precio'] * $producto['cantidad']; ?>
             <?php endforeach; ?>
         </table>
-        <p><b>Total: <?= $total ?>€</b></p>
+        <p class="total"><b>Total: <?= $total ?>€</b></p>
 
-        <form action="index.php?url=produto/listarProductos" method="post">
-            <input type="submit" value="Volver">
-        </form>
+        <div class="enLinea">
+            <a href="index.php?url=producto/listarProductos" class="linkBoton">Volver</a>
 
-        <form action="index.php?url=pedido/realizarPedido" method="post">
-            <?php foreach ($resumen as $producto): ?>
-                <input type="hidden" name="<?= $producto['tipo'] ?>[<?= $producto['id'] ?>]" value="<?= $producto['cantidad'] ?>">
-            <?php endforeach; ?>
+            <form action="index.php?url=pedido/realizarPedido" method="post">
+                <?php foreach ($resumen as $producto): ?>
+                    <?php if ($producto['tipo'] === 'plato'): ?>
+                        <input type="hidden" name="platos[<?= $producto['id'] ?>]" value="<?= $producto['cantidad'] ?>">
+                    <?php else: ?>
+                        <input type="hidden" name="bebidas[<?= $producto['id'] ?>]"
+                               value="<?= $producto['cantidad'] ?>">
+                    <?php endif; ?>
+                <?php endforeach; ?>
 
-            <input type="submit" value="Pedir">
-        </form>
 
+                <input type="submit" value="Pedir">
+            </form>
+        </div>
     </div>
 </div>

@@ -59,7 +59,7 @@ if (isset($_GET['filtrar'])) {
                         </td>
                         <td class="centrado"><?= $plato['nombre'] ?></td>
                         <td><?= $plato['descripcion'] ?></td>
-                        <td><?= $plato['categoria'] ?></td>
+                        <td class="centrado"><?= $plato['categoria'] ?></td>
                         <td class="centrado"><?= $plato['precio'] ?>€</td>
                         <td class="centrado"><?php if ($plato['disponible'] == 1) {
                                 echo "Sí";
@@ -76,7 +76,7 @@ if (isset($_GET['filtrar'])) {
                         </td>
                         <td class="centrado"><?= $bebida['nombre'] ?></td>
                         <td><?= $bebida['descripcion'] ?></td>
-                        <td><?= $bebida['categoria'] ?></td>
+                        <td class="centrado"><?= $bebida['categoria'] ?></td>
                         <td class="centrado"><?= $bebida['precio'] ?>€</td>
                         <td class="centrado"><?php if ($bebida['disponible'] == 1) {
                                 echo "Sí";

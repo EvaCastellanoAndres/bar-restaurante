@@ -2,10 +2,10 @@
 
 <ul class="nav justify-content-center nav-tabs">
     <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="#">Todos los productos</a>
+        <a class="nav-link" aria-current="page" href="index.php?url=producto/listarProductos">Todos los productos</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="index.php?url=plato/listar">Platos</a>
+        <a class="nav-link active" aria-current="page" href="#">Platos</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="index.php?url=bebida/listar">Bebidas</a>
@@ -14,37 +14,63 @@
 </div>
 
 <!-- SESIONES -->
-<?php require 'layout/aside.php'; ?>
+<?php require 'layout/asideUsuario.php'; ?>
 
 <!-- TABLA -->
 
 <div class="col-10">
     <div class="cuerpo">
+
+        <!-- TODO: hacer que estén los botones en línea -->
+        <div class="botones">
+            <form action="index.php?url=producto/formulario" method="post">
+                <input type="submit" value="Añadir producto">
+            </form>
+            <form action="index.php?url=producto/categoria" method="post">
+                <input type="submit" value="Añadir categoría">
+            </form>
+        </div>
+
         <table>
             <tr>
                 <th>Producto</th>
                 <th>Descripción</th>
+                <th>Categoría</th>
                 <th>Precio</th>
                 <th>Disponible</th>
                 <th>Foto</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
             </tr>
             <?php foreach ($platos as $plato) : ?>
-                <tr class="tr_producto" data-bs-toggle="modal" data-bs-target="#modalDetalles<?= $plato['id'] ?>">
+
+                <tr class="tr_producto"> <!-- TODO -->
 
                 <td class="centrado"><?= $plato['nombre'] ?></td>
                 <td><?= $plato['descripcion'] ?></td>
+                <td class="centrado"><?= $plato['categoria'] ?></td>
                 <td class="centrado"><?= $plato['precio'] ?>€</td>
                 <td class="centrado"><?php if ($plato['disponible'] == 1) {
                         echo "Sí";
                     } else {
                         echo "No";
                     } ?></td>
-                <td class="centrado"><img src="img/<?=$plato['nombre']?>.jpg" alt="<?= $plato['nombre'] ?>"></td>
+                <td><img src="img/croquetas.jpg" alt="<?= $plato['nombre'] ?>"></td>
+                <td class="centrado">
+                    <a href="index.php?url=plato/editar&id=<?= $plato['id'] ?>">
+                        <img src="img/icons/editar.png" alt="icono editar" class="icono">
+                    </a>
+                </td>
+                <td class="centrado">
+                    <a data-bs-toggle="modal" data-bs-target="#modalEliminar<?= $plato['id'] ?>">
+                        <img src="img/icons/borrar.png" alt="icono borrar" class="icono">
+                    </a>
+                </td>
                 </tr>
 
-            <!-- Tarjeta detalle -->
+            <!-- tarjeta confirmación eliminar -->
                 <div class="modal fade"
-                     id="modalDetalles<?= $plato['id'] ?>"
+                     id="modalEliminar<?= $plato['id'] ?>"
                      tabindex="-1"
                      aria-hidden="true">
 
@@ -53,48 +79,30 @@
 
                             <div class="modal-header">
                                 <h3 class="modal-title">
-                                    <?= $plato['nombre'] ?>
+                                    ¿Eliminar plato <b><?= $plato['nombre'] ?></b>?
                                 </h3>
                                 <button type="button" class="btn-close"
                                         data-bs-dismiss="modal"></button>
-                            </div>
-                            <div class="modal-body">
-                                <p><?= $plato['descripcion'] ?></p>
-                                <p><?= $plato['precio'] ?>€</p>
-                                <p><?php if ($plato['disponible'] == 1) {
-                                        echo "Está disponible para pedir";
-                                    } else {
-                                        echo "No está disponible para pedir";
-                                    } ?></p>
-                                <img src="img/croquetas.jpg" alt=" <?= $plato['nombre'] ?>">
                             </div>
 
                             <div class="modal-footer">
                                 <button type="button"
                                         class="btn btn-secondary"
                                         data-bs-dismiss="modal">
-                                    Cerrar
+                                    Cancelar
                                 </button>
+
+                                <a href="index.php?url=plato/eliminar&id=<?= $plato['id'] ?>"
+                                   class="btn btn-danger">
+                                    Eliminar
+                                </a>
                             </div>
 
                         </div>
                     </div>
                 </div>
+            <?php endforeach; ?>
 
-            <?php endforeach; ?>
-            <?php foreach ($bebidas as $bebida): ?>
-                <tr class="tr_producto">
-                    <td class="centrado"><?= $bebida['nombre'] ?></td>
-                    <td><?= $bebida['descripcion'] ?></td>
-                    <td class="centrado"><?= $bebida['precio'] ?>€</td>
-                    <td class="centrado"><?php if ($bebida['disponible'] == 1) {
-                            echo "Sí";
-                        } else {
-                            echo "No";
-                        } ?></td>
-                    <td><?= $bebida['foto'] ?></td>
-                </tr>
-            <?php endforeach; ?>
         </table>
     </div>
 </div>

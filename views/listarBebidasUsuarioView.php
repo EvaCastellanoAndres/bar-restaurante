@@ -19,18 +19,36 @@
 
 <div class="col-10">
     <div class="cuerpo">
-        <table>
+        <form action="index.php?url=pedido/resumenPedido" method="post"> <!-- TODO -->
+
+            <label class="select_servicio">
+                Tipo de servicio:
+                <select name="servicio" required>
+                    <option disabled selected value="">Seleccione el tipo de servicio</option>
+                    <option value="mesa">En mesa</option>
+                    <option value="llevar">Para llevar</option>
+                    <option value="domicilio">Entregar a domicilio</option>
+                </select>
+            </label>
+
+            <table>
             <tr>
-                <th>Producto</th>
+                <th>Pedir</th>
+                <th>Bebida</th>
                 <th>Descripción</th>
+                <th>Categoría</th>
                 <th>Precio</th>
                 <th>Disponible</th>
                 <th>Foto</th>
             </tr>
-            <?php foreach ($bebidas as $bebida) : ?>
+            <?php foreach ($bebidas as $bebida): ?>
                 <tr>
+                    <td>
+                        <input type="number" class="inputPedir" name="bebidas[<?= $bebida['id'] ?>]" min="0" value="0">
+                    </td>
                     <td class="centrado"><?= $bebida['nombre'] ?></td>
                     <td><?= $bebida['descripcion'] ?></td>
+                    <td class="centrado"><?= $bebida['categoria'] ?></td>
                     <td class="centrado"><?= $bebida['precio'] ?>€</td>
                     <td class="centrado"><?php if ($bebida['disponible'] == 1) {
                             echo "Sí";
@@ -41,6 +59,8 @@
                 </tr>
             <?php endforeach; ?>
         </table>
+            <input type="submit" value="Realizar pedido" class="boton">
+        </form>
     </div>
 </div>
 </div>
