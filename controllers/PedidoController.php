@@ -21,6 +21,7 @@ class PedidoController
     public function realizarPedido(): void
     {
         session_start();
+
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             header('Location: index.php?url=producto/listarProductos');
             exit();
@@ -28,6 +29,9 @@ class PedidoController
 
         $pedido = new Pedido();
         $idPedido = $pedido->realizarPedido();
+
+        $tipoServicio = $_POST['servicio'] ?? 'en mesa';
+        $pedidoDetalle = $pedido->getPedidoDetalle($idPedido);
 
         require __DIR__ . '/../views/realizarPedidoView.php';
     }

@@ -25,7 +25,7 @@
                     <td><?= $producto['descripcion'] ?></td>
                     <td><?= $producto['categoria'] ?></td>
                     <td class="centrado"><?= $producto['precio'] ?> €</td>
-                    <td></td>
+                    <td class="centrado"><img src="img/<?= $producto['foto'] ?>" alt="<?= $producto['nombre'] ?>"></td>
                 </tr>
                 <?php $total += $producto['precio'] * $producto['cantidad']; ?>
             <?php endforeach; ?>
@@ -33,7 +33,23 @@
         <p class="total"><b>Total: <?= $total ?>€</b></p>
 
         <div class="enLinea">
-            <a href="index.php?url=producto/listarProductos" class="linkBoton">Volver</a>
+
+            <!-- boton de volver atras y que se guarden los datos -->
+            <form action="index.php?url=producto/listarProductos" method="post">
+                <?php foreach ($resumen as $producto): ?>
+                    <?php if ($producto['tipo'] === 'plato'): ?>
+                        <input type="hidden" name="platos[<?= $producto['id'] ?>]" value="<?= $producto['cantidad'] ?>">
+                    <?php else: ?>
+                        <input type="hidden" name="bebidas[<?= $producto['id'] ?>]" value="<?= $producto['cantidad'] ?>">
+                    <?php endif; ?>
+                <?php endforeach; ?>
+
+                <input type="hidden" name="servicio" value="<?= $_POST['servicio'] ?>">
+                <input type="submit" value="Volver">
+            </form>
+
+
+
 
             <form action="index.php?url=pedido/realizarPedido" method="post">
                 <?php foreach ($resumen as $producto): ?>
@@ -44,7 +60,7 @@
                                value="<?= $producto['cantidad'] ?>">
                     <?php endif; ?>
                 <?php endforeach; ?>
-
+                <input type="hidden" name="servicio" value="<?= $_POST['servicio'] ?>">
 
                 <input type="submit" value="Pedir">
             </form>

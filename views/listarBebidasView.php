@@ -27,8 +27,8 @@
                 <th>Disponible</th>
                 <th>Foto</th>
             </tr>
-            <?php foreach ($bebidas as $bebida) : ?>
-                <tr>
+            <?php foreach ($bebidas as $bebida): ?>
+                <tr class="tr_producto" data-bs-toggle="modal" data-bs-target="#modalDetallesBebida<?= $bebida['id'] ?>">
                     <td class="centrado"><?= $bebida['nombre'] ?></td>
                     <td><?= $bebida['descripcion'] ?></td>
                     <td class="centrado"><?= $bebida['precio'] ?>€</td>
@@ -37,17 +37,50 @@
                         } else {
                             echo "No";
                         } ?></td>
-                    <td><?= $bebida['foto'] ?></td>
+                    <td class="centrado"><img src="img/<?= $bebida['foto'] ?>" alt="<?= $bebida['nombre'] ?>"></td>
                 </tr>
+
+                <!-- Tarjeta detalle bebida -->
+                <div class="modal fade"
+                     id="modalDetallesBebida<?= $bebida['id'] ?>"
+                     tabindex="-1"
+                     aria-hidden="true">
+
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <div class="modal-header">
+                                <h3 class="modal-title">
+                                    <?= $bebida['nombre'] ?>
+                                </h3>
+                                <button type="button" class="btn-close"
+                                        data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p><?= $bebida['descripcion'] ?></p>
+                                <p><?= $bebida['precio'] ?>€</p>
+                                <p><?php if ($bebida['disponible'] == 1) {
+                                        echo "Está disponible para pedir";
+                                    } else {
+                                        echo "No está disponible para pedir";
+                                    } ?></p>
+                                <img src="img/<?= $bebida['foto'] ?>" alt=" <?= $bebida['nombre'] ?>">
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button"
+                                        class="btn btn-secondary"
+                                        data-bs-dismiss="modal">
+                                    Cerrar
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
             <?php endforeach; ?>
         </table>
     </div>
 </div>
-</div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
-</body>
-</html>
+    <!-- FOOTER -->
+<?php require 'layout/footer.php'; ?>

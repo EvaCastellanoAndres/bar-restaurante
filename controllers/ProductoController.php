@@ -1,4 +1,5 @@
 <?php
+use Intervention\Image\ImageManagerStatic as Image;
 class ProductoController
 {
 
@@ -44,13 +45,16 @@ class ProductoController
         session_start();
 
         $foto = null;
+
         if (!empty($_FILES['foto']['name'])) {
-            $foto = $_FILES['foto']['name'];
-            move_uploaded_file(
-                $_FILES['foto']['tmp_name'],
-                'img/' . $foto
-            );
+
+            $extension = pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION);
+            $foto = uniqid() . '.' . $extension;
+
+            Image::make($_FILES['foto']['tmp_name'])
+                ->save('img/' . $foto);
         }
+
 
         $producto = new Producto();
         $producto->crearProducto([

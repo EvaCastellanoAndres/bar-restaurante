@@ -13,18 +13,14 @@
                 <th>Estado</th>
                 <th>Fecha y hora</th>
             </tr>
-            <?php foreach ($pedido as $detalle): ?>
+            <?php foreach ($pedidoDetalle as $detalle): ?>
                 <tr>
-                    <td class="centrado"><?= $detalle['tipo_servicio'] ?></td>
+                    <td class="centrado"><?= $tipoServicio ?></td>
                     <td><?= $detalle['estado'] ?></td>
                     <td><?= $detalle['fecha_hora'] ?></td>
-                    <td></td>
                 </tr>
             <?php endforeach; ?>
         </table>
-
-
-
-
+        <a href="index.php?url=producto/listarProductos" class="linkBoton botones">Volver a la página principal</a>
     </div>
 </div>

@@ -28,7 +28,8 @@
                 <th>Foto</th>
             </tr>
             <?php foreach ($platos as $plato) : ?>
-                <tr>
+                <tr class="tr_producto" data-bs-toggle="modal" data-bs-target="#modalDetalles<?= $plato['id'] ?>">
+
                     <td class="centrado"><?= $plato['nombre'] ?></td>
                     <td><?= $plato['descripcion'] ?></td>
                     <td class="centrado"><?= $plato['precio'] ?>€</td>
@@ -37,17 +38,51 @@
                         } else {
                             echo "No";
                         } ?></td>
-                    <td><?= $plato['foto'] ?></td>
+                    <td class="centrado"><img src="img/<?=$plato['foto']?>" alt="<?= $plato['nombre'] ?>"></td>
                 </tr>
+
+                <!-- Tarjeta detalle plato -->
+                <div class="modal fade"
+                     id="modalDetalles<?= $plato['id'] ?>"
+                     tabindex="-1"
+                     aria-hidden="true">
+
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <div class="modal-header">
+                                <h3 class="modal-title">
+                                    <?= $plato['nombre'] ?>
+                                </h3>
+                                <button type="button" class="btn-close"
+                                        data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p><?= $plato['descripcion'] ?></p>
+                                <p><?= $plato['precio'] ?>€</p>
+                                <p><?php if ($plato['disponible'] == 1) {
+                                        echo "Está disponible para pedir";
+                                    } else {
+                                        echo "No está disponible para pedir";
+                                    } ?></p>
+                                <img src="img/<?= $plato['foto'] ?>" alt=" <?= $plato['nombre'] ?>">
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button"
+                                        class="btn btn-secondary"
+                                        data-bs-dismiss="modal">
+                                    Cerrar
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
             <?php endforeach; ?>
         </table>
     </div>
 </div>
-</div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
-</body>
-</html>
+<!-- FOOTER -->
+<?php require 'layout/footer.php'; ?>

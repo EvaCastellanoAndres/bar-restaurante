@@ -80,19 +80,21 @@ class Pedido
         // Insertar detalle
         foreach ($resumen as $item) {
             if ($item['tipo'] === 'plato') {
-                $sql = "INSERT INTO pedido_detalle (id_pedido, id_plato, cantidad, precio_unidad)
-                        VALUES (:id_pedido, :id_plato, :cantidad, :precio_unidad)";
+                $sql = "INSERT INTO pedido_detalle (id_pedido, id_plato, id_bebida, cantidad, precio_unidad)
+            VALUES (:id_pedido, :id_plato, :id_bebida, :cantidad, :precio_unidad)";
                 $params = [
                     ':id_pedido' => $idPedido,
                     ':id_plato' => $item['id'],
+                    ':id_bebida' => null,
                     ':cantidad' => $item['cantidad'],
                     ':precio_unidad' => $item['precio']
                 ];
             } else { // bebida
-                $sql = "INSERT INTO pedido_detalle (id_pedido, id_bebida, cantidad, precio_unidad)
-                        VALUES (:id_pedido, :id_bebida, :cantidad, :precio_unidad)";
+                $sql = "INSERT INTO pedido_detalle (id_pedido, id_plato, id_bebida, cantidad, precio_unidad)
+            VALUES (:id_pedido, :id_plato, :id_bebida, :cantidad, :precio_unidad)";
                 $params = [
                     ':id_pedido' => $idPedido,
+                    ':id_plato' => null,
                     ':id_bebida' => $item['id'],
                     ':cantidad' => $item['cantidad'],
                     ':precio_unidad' => $item['precio']
@@ -103,4 +105,14 @@ class Pedido
 
         return $idPedido;
     }
+
+    public function getPedidoDetalle(int $idPedido): array
+    {
+        $stmt = $this->db->lanzar_consulta(
+            "SELECT * FROM pedidos WHERE id = ?", [$idPedido]
+        );
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
 }

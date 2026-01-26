@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Trade+Winds&display=swap');
 
+body{
+    height: 100%;
+}
+
 h1 {
     text-align: center;
     padding: 25px;
@@ -16,12 +20,16 @@ h2 {
 
 aside {
     background-color: rgb(255, 241, 211);
-    position: absolute;
-    height: 100%;
+    top: 0;
+    position: fixed;
+    height: 100vh;
     width: 250px;
     border-right: 1px solid rgb(235, 237, 239);
     padding: 20px;
 
+}
+.contenidoAside{
+    margin-top: 150px;
 }
 
 .header {
@@ -44,14 +52,15 @@ hr {
 .container-fluid {
     margin: 0;
     padding: 0;
+    height: 100%;
 }
-
+/*
 .cuerpo {
-    margin-left: 10px;
+    margin-left: 300px;
 }
-
+*/
 table {
-    margin: 30px 0 0 30px;
+    margin: 30px 0 30px 30px;
 }
 
 td, th {
@@ -64,7 +73,7 @@ th {
     background-color: rgb(255, 241, 211);
 }
 
-.tr_producto:hover{
+.tr_producto:hover {
     cursor: pointer;
     background-color: rgba(207, 207, 207, 0.22);
 }
@@ -82,35 +91,35 @@ input {
     border: 1px solid black;
 }
 
-.inputPedir{
+.inputPedir {
     width: 50px;
     text-align: center;
 }
 
-.select_servicio{
+.select_servicio {
     margin: 30px 0 0 30px;
 }
 
-.error{
+.error {
     color: rgba(255, 0, 0, 0.83);
 }
 
-.icono{
+.icono {
     width: 30px;
     text-align: center;
 }
 
-.botonAñadirProducto{
+.botonAñadirProducto {
     margin-left: 30px;
     margin-top: 30px;
 }
 
-.fondo{
+.fondo {
     background-color: rgb(255, 241, 211);
     height: 100vh;
 }
 
-.caja{
+.caja {
     background-color: white;
     width: 700px;
     margin-left: auto;
@@ -121,42 +130,42 @@ input {
     padding: 20px;
 }
 
-.labelNuevoProducto{
+.labelNuevoProducto {
     margin-top: 15px;
 }
 
-.botonAñadir{
+.botonAñadir {
     margin: 20px;
     width: 100px;
     height: 40px;
 }
 
-.botonAñadir:hover{
+.botonAñadir:hover {
     background-color: #bfffa4;
 }
 
-textarea{
+textarea {
     resize: none;
     border-radius: 5px;
 }
 
 .selectTipoProducto,
 .selectCategoria,
-.selectTipoProducto{
+.selectTipoProducto {
     width: 200px;
 }
 
-.botones{
+.botones {
     margin: 30px;
 }
 
-img{
+img {
     width: 100px;
 
     border-radius: 5px;
 }
 
-.total{
+.total {
     margin-left: 30px;
     margin-top: 10px;
 }
@@ -168,11 +177,46 @@ img{
     margin-left: 30px;
 }
 
-.linkBoton{
+.linkBoton {
     color: black;
     text-decoration: none;
     border: 1px solid black;
     border-radius: 5px;
     padding: 1px 5px 1px 5px;
     background-color: #F0F0F0;
+}
+
+input[type="submit"]:hover {
+    background-color: #e1e1e1;
+}
+
+h4 {
+    margin-top: 20px;
+}
+
+.tr_pedido {
+}
+
+.linkTitulo {
+    color: black;
+    text-decoration: none;
+}
+
+.footer {
+    bottom: 0;
+    background-color: rgb(255, 241, 211);
+    height: 200px;
+    width: 100%;
+    border-top: 1px solid rgb(235, 237, 239);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.footer ul {
+    list-style-type: none;
+}
+.footer li{
+    margin: 10px;
 }

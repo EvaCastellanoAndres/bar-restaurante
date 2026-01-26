@@ -15,7 +15,7 @@ if (isset($_GET['filtrar'])) {
     <div class="row">
         <div class="col-2">
             <aside>
-
+<div class="contenidoAside">
                 <h2>Bienvenidx, <?= $usuario ?></h2>
                 <hr>
                 <p><b>Filtrar productos</b></p>
@@ -35,6 +35,6 @@ if (isset($_GET['filtrar'])) {
                 <form action="index.php?url=usuario/cerrarSesion" method="post">
                     <input type="submit" value="Cerrar sesión">
                 </form>
-
+</div>
             </aside>
         </div>

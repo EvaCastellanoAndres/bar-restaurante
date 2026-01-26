@@ -6,15 +6,20 @@ class UsuarioController
     {
         if ($_POST) {
             $usuario = new Usuario();
-            $usuario->registrar(
-                $_POST['email'],
-                $_POST['usuario'],
-                $_POST['password']
-            );
-
-            header('Location: index.php?url=producto/listarProductos');
+            try {
+                $usuario->registrar(
+                    $_POST['email'],
+                    $_POST['usuario'],
+                    $_POST['password']
+                );
+                header('Location: index.php?url=producto/listarProductos');
+                exit();
+            } catch (Exception $e) {
+                header('Location: index.php?url=producto/listarProductos&error=2');
+            }
         }
     }
+
 
     public function iniciarSesion(): void
     {
